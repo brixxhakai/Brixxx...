@@ -1,119 +1,227 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>ZENIN 3D VIDEO GALLERY</title>
+
+<title>Suhan's Coconut</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:black;
 color:white;
-text-align:center;
 overflow-x:hidden;
+background:black;
 }
 
-/* animated background */
+/* BEACH BACKGROUND */
 
-body::before{
-content:"";
+.sky{
 position:fixed;
-top:0;
-left:0;
 width:100%;
-height:100%;
-background:radial-gradient(circle at 50% 50%, #111, #000);
-animation:bgmove 8s infinite alternate;
+height:100vh;
+background:linear-gradient(#87ceeb,#f4a460,#0a0a2a);
+animation:daynight 60s linear infinite;
+z-index:-2;
+}
+
+@keyframes daynight{
+
+0%{background:linear-gradient(#87ceeb,#87ceeb,#f4a460);}
+25%{background:linear-gradient(#4da6ff,#ffd27f,#ff7f50);}
+50%{background:linear-gradient(#ff7f50,#2c2c54,#000022);}
+75%{background:linear-gradient(#000022,#000033,#000000);}
+100%{background:linear-gradient(#87ceeb,#87ceeb,#f4a460);}
+
+}
+
+/* SUN */
+
+.sun{
+position:fixed;
+width:120px;
+height:120px;
+background:yellow;
+border-radius:50%;
+top:70%;
+left:-10%;
+animation:sunmove 60s linear infinite;
+box-shadow:0 0 60px yellow;
 z-index:-1;
 }
 
-@keyframes bgmove{
-from{transform:scale(1)}
-to{transform:scale(1.2)}
+@keyframes sunmove{
+
+0%{top:70%;left:-10%;}
+25%{top:10%;left:30%;}
+50%{top:70%;left:60%;}
+75%{top:90%;left:90%;opacity:0;}
+100%{top:70%;left:-10%;opacity:1;}
+
 }
 
-h1{
-margin-top:30px;
-font-size:40px;
-letter-spacing:4px;
+/* MOON */
+
+.moon{
+position:fixed;
+width:90px;
+height:90px;
+background:#eee;
+border-radius:50%;
+top:90%;
+left:100%;
+animation:moonmove 60s linear infinite;
+box-shadow:0 0 40px white;
+z-index:-1;
 }
 
-/* upload button */
+@keyframes moonmove{
 
-.upload{
-margin:30px;
+0%{top:90%;left:100%;opacity:0;}
+50%{top:90%;left:100%;opacity:0;}
+60%{top:20%;left:70%;opacity:1;}
+80%{top:10%;left:40%;}
+100%{top:90%;left:-20%;opacity:0;}
+
 }
 
-input{
-padding:10px;
+/* BEACH */
+
+.beach{
+position:fixed;
+bottom:0;
+width:100%;
+height:200px;
+background:linear-gradient(#d2b48c,#c2a173);
+z-index:-1;
 }
 
-/* 3D gallery */
+/* HERO */
 
-.gallery{
+section{
+height:100vh;
 display:flex;
-flex-wrap:wrap;
+align-items:center;
 justify-content:center;
-gap:30px;
+text-align:center;
+flex-direction:column;
 padding:40px;
 }
 
-.card{
-width:300px;
-perspective:1000px;
+h1{
+font-size:60px;
+letter-spacing:4px;
 }
 
-video{
-width:100%;
-border-radius:20px;
-box-shadow:0 0 25px rgba(0,255,255,0.6);
-transition:0.5s;
+/* COCONUT */
+
+.coconut{
+width:200px;
+height:260px;
+background:radial-gradient(circle at 40% 40%,#4caf50,#1f5e2e);
+border-radius:50%;
+margin-top:40px;
+animation:rotate 10s linear infinite;
+transition:1s;
 }
 
-video:hover{
-transform:rotateY(15deg) rotateX(10deg) scale(1.05);
+@keyframes rotate{
+from{transform:rotateY(0deg);}
+to{transform:rotateY(360deg);}
+}
+
+/* CRACK EFFECT */
+
+.cracked{
+transform:scale(1.1) rotate(10deg);
+background:linear-gradient(#4caf50,#1f5e2e,#ffffff);
+}
+
+/* TEXT SECTIONS */
+
+.content{
+max-width:700px;
+font-size:20px;
+line-height:1.6;
+}
+
+h2{
+font-size:40px;
+margin-bottom:20px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1>ZENIN 3D VIDEO GALLERY</h1>
+<div class="sky"></div>
+<div class="sun"></div>
+<div class="moon"></div>
+<div class="beach"></div>
 
-<div class="upload">
-<input type="file" id="upload" accept="video/*" multiple>
-</div>
+<!-- HERO -->
 
-<div class="gallery" id="gallery"></div>
+<section>
+
+<h1>SUHAN'S COCONUT</h1>
+
+<div class="coconut" id="coconut"></div>
+
+<p>Scroll to explore</p>
+
+</section>
+
+<!-- ORIGIN -->
+
+<section>
+
+<h2>ORIGIN OF COCONUT</h2>
+
+<p class="content">
+Coconuts are believed to have originated in Southeast Asia
+and spread naturally across tropical coastlines through
+ocean currents and human cultivation.
+</p>
+
+</section>
+
+<!-- SEASON -->
+
+<section>
+
+<h2>SUJIR'S EXISTENCE</h2>
+
+<p class="content">
+Coconut trees grow throughout the year in tropical regions.
+Peak harvest seasons occur during warm and humid months,
+making coconuts a vital resource for coastal communities.
+</p>
+
+</section>
 
 <script>
 
-let upload=document.getElementById("upload")
-let gallery=document.getElementById("gallery")
+/* CRACK COCONUT ON SCROLL */
 
-upload.onchange=function(){
+window.addEventListener("scroll",function(){
 
-let files=this.files
+let coconut=document.getElementById("coconut")
 
-for(let i=0;i<files.length;i++){
+let scroll=window.scrollY
 
-let video=document.createElement("video")
-video.src=URL.createObjectURL(files[i])
-video.controls=true
-
-let card=document.createElement("div")
-card.className="card"
-
-card.appendChild(video)
-gallery.appendChild(card)
-
+if(scroll>400){
+coconut.classList.add("cracked")
+}else{
+coconut.classList.remove("cracked")
 }
 
-}
+})
 
 </script>
 
 </body>
+
 </html>
