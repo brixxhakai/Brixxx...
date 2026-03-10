@@ -1,40 +1,101 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>My 3D Video Website</title>
-<link rel="stylesheet" href="style.css">
+<title>ZENIN 3D VIDEO GALLERY</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#000000,#1b1b1b,#000000);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+h1{
+font-size:40px;
+margin-top:40px;
+letter-spacing:3px;
+}
+
+.upload{
+margin:30px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+padding:20px;
+}
+
+video{
+width:100%;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+transition:0.4s;
+}
+
+video:hover{
+transform:scale(1.05);
+}
+
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+background:radial-gradient(circle at 30% 30%,#222,#000);
+animation:move 10s infinite alternate;
+}
+
+@keyframes move{
+from{transform:scale(1)}
+to{transform:scale(1.2)}
+}
+
+</style>
+
 </head>
 
 <body>
 
-<header>
-<h1 contenteditable="true">My 3D Video Gallery</h1>
-<p contenteditable="true">Click this text to edit it anytime.</p>
-</header>
+<div class="background"></div>
 
-<section class="controls">
-<label>Background Color:</label>
-<input type="color" id="bgColor">
+<h1>ZENIN 3D VIDEO WEBSITE</h1>
 
-<label>Text Color:</label>
-<input type="color" id="textColor">
-</section>
+<div class="upload">
+<input type="file" id="upload" accept="video/*" multiple>
+</div>
 
-<section class="video-gallery">
+<div class="gallery" id="gallery"></div>
 
-<video controls>
-<source src="videos/video1.mp4" type="video/mp4">
-</video>
+<script>
 
-<video controls>
-<source src="videos/video2.mp4" type="video/mp4">
-</video>
+let upload=document.getElementById("upload")
+let gallery=document.getElementById("gallery")
 
-</section>
+upload.onchange=function(){
 
-<script src="script.js"></script>
+for(let file of this.files){
+
+let url=URL.createObjectURL(file)
+
+let v=document.createElement("video")
+v.src=url
+v.controls=true
+
+gallery.appendChild(v)
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
