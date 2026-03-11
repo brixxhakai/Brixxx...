@@ -1,248 +1,218 @@
 
-<!DOCTYPE html><html>
-<head><title>Suhan's Coconut</title><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Suhan's Coconut</title>
+
+<style>
 
 body{
 margin:0;
 overflow-x:hidden;
 font-family:Arial;
+background:black;
 color:white;
 }
 
-/* SKY */
-
-.sky{
+canvas{
 position:fixed;
-width:100%;
-height:100vh;
-z-index:-5;
-background:linear-gradient(#87ceeb,#f4a460);
-animation:daycycle 60s linear infinite;
-}
-
-@keyframes daycycle{
-
-0%{background:linear-gradient(#87ceeb,#f4a460);}
-25%{background:linear-gradient(#4da6ff,#ffae42);}
-50%{background:linear-gradient(#ff7f50,#2c2c54);}
-75%{background:linear-gradient(#000022,#000000);}
-100%{background:linear-gradient(#87ceeb,#f4a460);}
-
-}
-
-/* SUN */
-
-.sun{
-position:fixed;
-width:120px;
-height:120px;
-background:yellow;
-border-radius:50%;
-box-shadow:0 0 80px yellow;
-top:70%;
-left:-10%;
-animation:sunmove 60s linear infinite;
-z-index:-4;
-}
-
-@keyframes sunmove{
-
-0%{top:70%;left:-10%;}
-25%{top:10%;left:30%;}
-50%{top:70%;left:70%;}
-75%{top:90%;left:110%;opacity:0;}
-100%{top:70%;left:-10%;opacity:1;}
-
-}
-
-/* MOON */
-
-.moon{
-position:fixed;
-width:90px;
-height:90px;
-background:#eee;
-border-radius:50%;
-box-shadow:0 0 40px white;
-bottom:-100px;
-left:50%;
-animation:moonmove 60s linear infinite;
-z-index:-4;
-}
-
-@keyframes moonmove{
-
-0%{bottom:-100px;opacity:0;}
-50%{bottom:-100px;opacity:0;}
-60%{bottom:150px;left:60%;opacity:1;}
-75%{bottom:300px;left:50%;}
-90%{bottom:150px;left:40%;}
-100%{bottom:-100px;opacity:0;}
-
-}
-
-/* OCEAN */
-
-.ocean{
-position:fixed;
-bottom:180px;
-width:100%;
-height:120px;
-background:#1e90ff;
-animation:waves 5s infinite ease-in-out;
-z-index:-3;
-}
-
-@keyframes waves{
-0%{height:120px;}
-50%{height:140px;}
-100%{height:120px;}
-}
-
-/* BEACH */
-
-.beach{
-position:fixed;
-bottom:0;
-width:100%;
-height:180px;
-background:linear-gradient(#e6c27a,#d2a679);
-z-index:-2;
-}
-
-/* PALM TREES */
-
-.tree{
-position:fixed;
-bottom:180px;
-width:20px;
-height:220px;
-background:#5c3a1a;
-border-radius:10px;
+top:0;
+left:0;
 z-index:-1;
 }
-
-.tree::after{
-content:'';
-position:absolute;
-top:-80px;
-left:-80px;
-width:200px;
-height:150px;
-background:
-radial-gradient(circle,#2e8b57 30%,transparent 31%);
-background-size:70px 70px;
-}
-
-.left{
-left:40px;
-transform:rotate(-6deg);
-}
-
-.right{
-right:40px;
-transform:rotate(6deg);
-}
-
-/* SCROLL SECTIONS */
 
 section{
 height:100vh;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:center;
 text-align:center;
 padding:40px;
 }
 
 h1{
 font-size:60px;
-letter-spacing:4px;
+letter-spacing:5px;
 }
 
 h2{
-font-size:42px;
-margin-bottom:20px;
+font-size:40px;
 }
 
-.content{
+p{
 max-width:700px;
-font-size:20px;
+font-size:18px;
 line-height:1.6;
 }
 
-/* 3D CANVAS */
+</style>
 
-#coconutCanvas{
-width:300px;
-height:300px;
-}
+</head>
 
-</style></head><body><div class="sky"></div>
-<div class="sun"></div>
-<div class="moon"></div>
-<div class="ocean"></div>
-<div class="beach"></div><div class="tree left"></div>
-<div class="tree right"></div><!-- HERO --><section><h1>SUHAN'S COCONUT</h1><canvas id="coconutCanvas"></canvas>
+<body>
 
-<p>Scroll to explore</p></section><!-- ORIGIN --><section><h2>Origin of Coconut</h2><p class="content">
-Coconuts are believed to have originated in Southeast Asia and spread across tropical coastlines through ocean currents and human cultivation.
-</p></section><!-- SEASON --><section><h2>Sujir's Existence</h2><p class="content">
-Coconut trees grow year-round in tropical climates. The peak harvest season occurs during warm humid months when coconuts are most abundant.
-</p></section><!-- THREE JS --><script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script><script>
+<section>
 
-/* THREE JS SCENE */
+<div>
+<h1>SUHAN'S COCONUT</h1>
+<p>Scroll to explore</p>
+</div>
 
-const canvas = document.getElementById("coconutCanvas")
+</section>
+
+<section>
+
+<div>
+<h2>Origin of Coconuts</h2>
+
+<p>
+Coconut trees grow in tropical climates near the sea.
+They have been cultivated for over 4000 years and are
+one of the most useful plants in the world.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div>
+<h2>Sujir's Existence</h2>
+
+<p>
+Coconuts are most abundant during warm seasons.
+The tropical sun, ocean winds, and fertile soil
+create the perfect environment for coconut trees.
+</p>
+
+</div>
+
+</section>
+
+<script type="module">
+
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js";
+import {GLTFLoader} from "https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/loaders/GLTFLoader.js";
 
 const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(
 75,
-1,
+window.innerWidth/window.innerHeight,
 0.1,
 1000
 )
 
-camera.position.z = 3
+camera.position.z = 5
 
-const renderer = new THREE.WebGLRenderer({
-canvas:canvas,
-alpha:true
-})
+const renderer = new THREE.WebGLRenderer({antialias:true})
+renderer.setSize(window.innerWidth,window.innerHeight)
 
-renderer.setSize(300,300)
+document.body.appendChild(renderer.domElement)
 
-/* COCONUT SHAPE */
-
-const geometry = new THREE.SphereGeometry(1,64,64)
-
-const material = new THREE.MeshStandardMaterial({
-color:0x3fa34d,
-roughness:0.8,
-metalness:0.1
-})
-
-const coconut = new THREE.Mesh(geometry,material)
-
-scene.add(coconut)
-
-/* LIGHT */
-
-const light = new THREE.PointLight(0xffffff,1)
-
+const light = new THREE.DirectionalLight(0xffffff,1.2)
 light.position.set(5,5,5)
-
 scene.add(light)
 
-/* ANIMATION */
+const ambient = new THREE.AmbientLight(0xffffff,0.6)
+scene.add(ambient)
+
+const loader = new GLTFLoader()
+
+let coconut
+
+loader.load(
+"green_coconut.glb",
+
+function(gltf){
+
+coconut = gltf.scene
+coconut.scale.set(2,2,2)
+scene.add(coconut)
+
+}
+
+)
+
+const oceanGeometry = new THREE.PlaneGeometry(200,200,100,100)
+
+const oceanMaterial = new THREE.MeshPhongMaterial({
+color:0x1e90ff,
+flatShading:true
+})
+
+const ocean = new THREE.Mesh(oceanGeometry,oceanMaterial)
+
+ocean.rotation.x = -Math.PI/2
+ocean.position.y = -3
+
+scene.add(ocean)
+
+const sunGeometry = new THREE.SphereGeometry(1,32,32)
+
+const sunMaterial = new THREE.MeshBasicMaterial({
+color:0xffdd55
+})
+
+const sun = new THREE.Mesh(sunGeometry,sunMaterial)
+scene.add(sun)
+
+const moonMaterial = new THREE.MeshBasicMaterial({
+color:0xffffff
+})
+
+const moon = new THREE.Mesh(sunGeometry,moonMaterial)
+scene.add(moon)
+
+moon.visible=false
+
+let time = 0
 
 function animate(){
 
 requestAnimationFrame(animate)
 
+time += 0.002
+
+if(coconut){
+
 coconut.rotation.y += 0.01
+
+}
+
+const sunHeight = Math.sin(time)*20
+
+sun.position.set(30,sunHeight,0)
+
+moon.position.set(-30,-sunHeight,0)
+
+if(sunHeight < 0){
+
+sun.visible=false
+moon.visible=true
+
+}else{
+
+sun.visible=true
+moon.visible=false
+
+}
+
+const positions = ocean.geometry.attributes.position
+
+for(let i=0;i<positions.count;i++){
+
+const y = Math.sin(i+time*10)*0.1
+positions.setY(i,y)
+
+}
+
+positions.needsUpdate=true
 
 renderer.render(scene,camera)
 
@@ -250,22 +220,16 @@ renderer.render(scene,camera)
 
 animate()
 
-/* CRACK EFFECT */
+window.addEventListener("resize",()=>{
 
-window.addEventListener("scroll",function(){
+camera.aspect = window.innerWidth/window.innerHeight
+camera.updateProjectionMatrix()
 
-if(window.scrollY>400){
-
-coconut.scale.x=1.2
-coconut.scale.y=0.9
-
-}else{
-
-coconut.scale.set(1,1,1)
-
-}
+renderer.setSize(window.innerWidth,window.innerHeight)
 
 })
 
-</script></body>
+</script>
+
+</body>
 </html>
