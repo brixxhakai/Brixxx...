@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Coconut Slides</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+
 body{
 margin:0;
 font-family:'Inter', sans-serif;
@@ -29,7 +32,7 @@ z-index:-1;
 position:absolute;
 left:8%;
 top:40%;
-max-width:500px;
+max-width:520px;
 opacity:0;
 transition:opacity 1s ease;
 }
@@ -56,45 +59,57 @@ font-size:40px;
 cursor:pointer;
 user-select:none;
 }
+
 </style>
 </head>
 
 <body>
 
-<video id="bgvideo" src="beach.mp4"></video>
+<video id="bgvideo" src="background.mp4"></video>
 
 <div class="slide active">
+
 <h1>Suhan’s Coconut</h1>
+
 <p>
 Coconut is believed to have originated in the Indo-Pacific region, especially
 South and Southeast Asia. It has been cultivated for thousands of years and
-is widely used for food, oil, fiber, and medicine in tropical regions.
+is widely used for food, oil, fiber and medicine in tropical regions.
 </p>
+
 </div>
 
 <div class="slide">
+
 <h1>Sujir’s Existence</h1>
+
 <p>
 Coconut trees produce the most fruit in warm tropical climates with regular
-rainfall. Production is usually highest during summer and monsoon seasons
-when temperature and humidity support faster growth.
+rainfall. Production is highest during summer and monsoon seasons when
+temperature and humidity support faster growth.
 </p>
+
 </div>
 
 <div class="slide">
+
 <h1>Padmanna’s Rikshaw</h1>
+
 <p>
-Many students find Physics and Chemistry challenging in the 12th board exams.
-Understanding core concepts and consistent practice helps students improve
-their performance in these subjects.
+Many students struggle with Physics and Chemistry in the 12th board exams.
+Understanding concepts clearly and practicing regularly helps students
+improve their performance in these subjects.
 </p>
+
 </div>
 
 <div class="arrow" onclick="nextSlide()">➜</div>
 
 <script>
+
 let slides=document.querySelectorAll(".slide");
 let video=document.getElementById("bgvideo");
+
 let index=0;
 
 video.currentTime=0;
@@ -103,20 +118,28 @@ video.play();
 function nextSlide(){
 
 slides[index].classList.remove("active");
+
 index++;
 
 if(index>=slides.length){
+
 index=0;
 video.currentTime=5;
 video.play();
-}else{
+
+}
+
+else{
+
 video.currentTime=index*2;
 video.play();
+
 }
 
 slides[index].classList.add("active");
 
 }
+
 </script>
 
 </body>
