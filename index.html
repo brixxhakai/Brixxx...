@@ -55,7 +55,7 @@ line-height:1.6;
 position:fixed;
 right:40px;
 top:50%;
-font-size:40px;
+font-size:42px;
 cursor:pointer;
 user-select:none;
 }
@@ -65,16 +65,16 @@ user-select:none;
 
 <body>
 
-<video id="bgvideo" src="background.mp4"></video>
+<video id="bgvideo" src="background.mp4" muted></video>
 
 <div class="slide active">
 
 <h1>Suhan’s Coconut</h1>
 
 <p>
-Coconut is believed to have originated in the Indo-Pacific region, especially
-South and Southeast Asia. It has been cultivated for thousands of years and
-is widely used for food, oil, fiber and medicine in tropical regions.
+Coconut is believed to have originated in the Indo-Pacific region,
+especially South and Southeast Asia. It has been cultivated for
+thousands of years and used for food, oil and fiber.
 </p>
 
 </div>
@@ -84,9 +84,9 @@ is widely used for food, oil, fiber and medicine in tropical regions.
 <h1>Sujir’s Existence</h1>
 
 <p>
-Coconut trees produce the most fruit in warm tropical climates with regular
-rainfall. Production is highest during summer and monsoon seasons when
-temperature and humidity support faster growth.
+Coconut trees grow best in warm tropical climates with regular
+rainfall. Production is highest during summer and monsoon
+seasons when humidity and temperature are favorable.
 </p>
 
 </div>
@@ -96,51 +96,76 @@ temperature and humidity support faster growth.
 <h1>Padmanna’s Rikshaw</h1>
 
 <p>
-Many students struggle with Physics and Chemistry in the 12th board exams.
-Understanding concepts clearly and practicing regularly helps students
-improve their performance in these subjects.
+Many students struggle with Physics and Chemistry in the
+12th board exams. Strong concepts and consistent practice
+help students improve their results in these subjects.
 </p>
 
 </div>
 
-<div class="arrow" onclick="nextSlide()">➜</div>
+<div class="arrow">➜</div>
 
 <script>
 
-let slides=document.querySelectorAll(".slide");
-let video=document.getElementById("bgvideo");
+let video = document.getElementById("bgvideo")
+let slides = document.querySelectorAll(".slide")
+let arrow = document.querySelector(".arrow")
 
-let index=0;
+let segments = [
+[0,2],
+[2,4],
+[4,5],
+[5,8]
+]
 
-video.currentTime=0;
-video.play();
+let slideIndex = 0
 
-function nextSlide(){
+video.currentTime = 0
+video.play()
 
-slides[index].classList.remove("active");
+function playSegment(start,end){
 
-index++;
+video.currentTime = start
+video.play()
 
-if(index>=slides.length){
+let check = setInterval(()=>{
 
-index=0;
-video.currentTime=5;
-video.play();
+if(video.currentTime >= end){
+
+video.pause()
+clearInterval(check)
 
 }
 
-else{
-
-video.currentTime=index*2;
-video.play();
+},50)
 
 }
 
-slides[index].classList.add("active");
+playSegment(0,2)
+
+arrow.onclick = () => {
+
+slides[slideIndex].classList.remove("active")
+
+slideIndex++
+
+if(slideIndex === 3){
+
+playSegment(5,8)
+slideIndex = 0
+
+}else{
+
+playSegment(segments[slideIndex][0],segments[slideIndex][1])
+
+}
+
+slides[slideIndex].classList.add("active")
 
 }
 
 </script>
 
 </body>
+
 </html>
